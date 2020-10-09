@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Services\Admin\database\seeds;
+
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(\App\Services\Admin\database\seeds\CompanySeeder::class);
+        factory(\App\Data\Models\Company::class, 10000)->create();
     }
 }
