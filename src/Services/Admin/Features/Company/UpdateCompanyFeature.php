@@ -6,6 +6,7 @@ use App\Data\Enums\MediaCollection;
 use App\Data\Models\Company;
 use App\Domains\Company\Jobs\{DeleteCompanyMediaByCollectionNameJob,
     GetCompanyByIdJob,
+    StoreCompanyLogoJob,
     UpdateCompanyJob,
     UpdateCompanyLogoJob};
 use App\Domains\Http\Jobs\RespondWithJsonJob;
@@ -37,7 +38,7 @@ class UpdateCompanyFeature extends Feature
 
         if ($request->hasFile('logo')) {
             $this->run(new DeleteCompanyMediaByCollectionNameJob($this->company, MediaCollection::LOGO));
-            $this->run(new UpdateCompanyLogoJob($this->company, $request->file('logo')));
+            $this->run(new StoreCompanyLogoJob($this->company, $request->file('logo')));
         }
 
         $company = $this->run(new GetCompanyByIdJob($this->company->id));

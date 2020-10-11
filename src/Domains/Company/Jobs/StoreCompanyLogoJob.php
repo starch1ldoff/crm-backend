@@ -33,10 +33,12 @@ class StoreCompanyLogoJob extends Job
     /**
      * Execute the job.
      *
-     * @return bool
+     * @return void
      */
-    public function handle(): bool
+    public function handle(): void
     {
-        return $this->company->addMedia($this->logo)->toMediaCollection(MediaCollection::LOGO);
+        $this->company
+            ->addMedia($this->logo)
+            ->toMediaCollection(MediaCollection::LOGO);
     }
 }

@@ -27,7 +27,7 @@ class ShowEmployeeFeature extends Feature
     public function handle()
     {
         return $this->run(new RespondWithJsonJob([
-            'employee' => new EmployeeResource($this->employee)
+            'employee' => new EmployeeResource($this->employee->load(['company', 'company.media']))
         ]));
     }
 }

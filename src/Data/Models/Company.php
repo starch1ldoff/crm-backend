@@ -14,4 +14,14 @@ class Company extends Model implements HasMedia
      * @var string[]
      */
     protected $guarded = ['id'];
+
+    /**
+     * Employees.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function employees(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

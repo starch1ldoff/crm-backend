@@ -35,7 +35,7 @@ class UpdateEmployeeFeature extends Feature
         $employee = $this->run(new GetEmployeeByIdJob($this->employee->id));
 
         return $this->run(new RespondWithJsonJob([
-            'employee' => new EmployeeResource($employee)
+            'employee' => new EmployeeResource($employee->load(['company', 'company.media']))
         ]));
     }
 }

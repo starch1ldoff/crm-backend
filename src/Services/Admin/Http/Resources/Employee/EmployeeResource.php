@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\Http\Resources\Employee;
 
+use App\Services\Admin\Http\Resources\Company\CompanyResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmployeeResource extends JsonResource
@@ -20,6 +21,7 @@ class EmployeeResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'company' => new CompanyResource($this->whenLoaded('company')),
             'created_at' => $this->created_at->toAtomString(),
             'updated_at' => $this->updated_at->toAtomString(),
         ];

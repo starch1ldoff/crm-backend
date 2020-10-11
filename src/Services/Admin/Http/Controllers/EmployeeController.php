@@ -47,7 +47,9 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return $this->serve(ShowEmployeeFeature::class, $employee);
+        return $this->serve(ShowEmployeeFeature::class, [
+            'employee' => $employee
+        ]);
     }
 
     /**
@@ -58,7 +60,9 @@ class EmployeeController extends Controller
      */
     public function update(Employee $employee)
     {
-        return $this->serve(UpdateEmployeeFeature::class, $employee);
+        return $this->serve(UpdateEmployeeFeature::class, [
+            'employee' => $employee
+        ]);
     }
 
     /**
@@ -69,6 +73,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        return $this->serve(DeleteEmployeeFeature::class, $employee);
+        return $this->serve(DeleteEmployeeFeature::class, [
+            'employee' => $employee
+        ]);
     }
 }

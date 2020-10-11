@@ -30,6 +30,6 @@ class GetPaginatedEmployeesCollectionJob extends Job
      */
     public function handle(): LengthAwarePaginator
     {
-        return Employee::paginate($this->limit);
+        return Employee::with(['company', 'company.media'])->paginate($this->limit);
     }
 }

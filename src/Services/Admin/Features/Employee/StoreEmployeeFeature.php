@@ -18,7 +18,7 @@ class StoreEmployeeFeature extends Feature
         $employee = $this->run(new StoreEmployeeJob($data));
 
         return $this->run(new RespondWithJsonJob([
-            'employee' => new EmployeeResource($employee)
+            'employee' => new EmployeeResource($employee->load(['company', 'company.media']))
         ], Response::HTTP_CREATED));
     }
 }

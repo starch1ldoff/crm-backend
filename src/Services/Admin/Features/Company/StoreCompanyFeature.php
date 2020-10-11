@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\Features\Company;
 
+use App\Data\Models\User;
 use App\Domains\User\Jobs\GetFirstUserJob;
 use App\Domains\Company\Jobs\{SendCompanyCreatedNotificationJob, StoreCompanyJob, StoreCompanyLogoJob};
 use App\Domains\Http\Jobs\RespondWithJsonJob;
@@ -19,12 +20,11 @@ class StoreCompanyFeature extends Feature
         $company = $this->run(new StoreCompanyJob($data));
 
         if ($request->hasFile('logo')) {
-            $this->run($this->run(new StoreCompanyLogoJob(
+            $this->run(new StoreCompanyLogoJob(
                 $company,
                 $request->file('logo')
-            )));
+            ));
         }
-
         $user = $this->run(new GetFirstUserJob());
 
         $this->run(new SendCompanyCreatedNotificationJob($user, $company));
