@@ -3,12 +3,14 @@
 namespace App\Services\Admin\Http\Controllers;
 
 use App\Data\Models\Company;
-use App\Services\Admin\Features\Company\DeleteCompanyFeature;
-use App\Services\Admin\Features\Company\GetCompaniesListFeature;
-use App\Services\Admin\Features\Company\ShowCompanyFeature;
-use App\Services\Admin\Features\Company\StoreCompanyFeature;
-use App\Services\Admin\Features\Company\UpdateCompanyFeature;
-use Illuminate\Http\Request;
+use App\Services\Admin\Features\Company\{
+    DeleteCompanyFeature,
+    GetCompaniesListFeature,
+    ShowCompanyFeature,
+    StoreCompanyFeature,
+    UpdateCompanyFeature
+};
+use Illuminate\Http\Resources\Json\JsonResource;
 use Lucid\Foundation\Http\Controller;
 use Lucid\Foundation\ServesFeaturesTrait;
 
@@ -19,7 +21,7 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
     public function index()
     {
@@ -29,7 +31,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
     public function store()
     {
@@ -53,7 +55,7 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param Company $company
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
     public function update(Company $company)
     {
@@ -66,7 +68,7 @@ class CompanyController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Company $company
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
     public function destroy(Company $company)
     {

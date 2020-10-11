@@ -16,8 +16,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         $namespace = 'App\Services\Admin\Http\Controllers';
         $pathApi = __DIR__.'/../routes/api.php';
-        $pathWeb = __DIR__.'/../routes/web.php';
 
-        $this->loadRoutesFiles($router, $namespace, $pathApi, $pathWeb);
+        $router->group([
+            'middleware' => 'api',
+            'namespace'  => $namespace,
+            'prefix'     => 'api/v1',
+        ], function ($router) use ($pathApi) {
+            require $pathApi;
+        });
+
     }
 }

@@ -4,15 +4,15 @@ namespace App\Services\Admin\Features\Company;
 
 use App\Domains\Company\Jobs\GetCompaniesAsPaginatedCollectionJob;
 use App\Domains\Http\Jobs\RespondWithJsonJob;
+use App\Services\Admin\Http\Requests\Company\GetCompaniesListRequest;
 use App\Services\Admin\Http\Resources\Company\CompanyResource;
 use Lucid\Foundation\Feature;
-use Illuminate\Http\Request;
 
 class GetCompaniesListFeature extends Feature
 {
-    public function handle(Request $request)
+    public function handle(GetCompaniesListRequest $request)
     {
-        $limit = $request->get('limit');
+        $limit = $request->get('limit') ?? 10;
 
         $companies = $this->run(new GetCompaniesAsPaginatedCollectionJob($limit));
 

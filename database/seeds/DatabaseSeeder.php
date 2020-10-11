@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Admin\database\seeds\AdminUserSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(\App\Services\Admin\database\seeds\CompanySeeder::class);
+        $this->call(AdminUserSeeder::class);
+//        $this->call(\App\Services\Admin\database\seeds\CompanySeeder::class);
+//        $this->call(\App\Services\Admin\database\seeds\EmployeeSeeder::class);
     }
 }

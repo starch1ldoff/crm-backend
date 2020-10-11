@@ -2,12 +2,12 @@
 
 namespace App\Services\Admin\Features\Company;
 
+use App\Data\Enums\MediaCollection;
 use App\Data\Models\Company;
-use App\Domains\Company\Jobs\{
+use App\Domains\Company\Jobs\{DeleteCompanyMediaByCollectionNameJob,
     GetCompanyByIdJob,
     UpdateCompanyJob,
-    UpdateCompanyLogoJob
-};
+    UpdateCompanyLogoJob};
 use App\Domains\Http\Jobs\RespondWithJsonJob;
 use App\Services\Admin\Http\Requests\Company\UpdateCompanyRequest;
 use App\Services\Admin\Http\Resources\Company\CompanyResource;
@@ -35,8 +35,9 @@ class UpdateCompanyFeature extends Feature
 
         $this->run(new UpdateCompanyJob($this->company, $data));
 
-        if ($request->hasFile('image')) {
-            $this->run(new UpdateCompanyLogoJob($this->company, $request->file('images')));
+        if ($request->hasFile('logo')) {
+            $this->run(new DeleteCompanyMediaByCollectionNameJob($this->company, MediaCollection::LOGO));
+            $this->run(new UpdateCompanyLogoJob($this->company, $request->file('logo')));
         }
 
         $company = $this->run(new GetCompanyByIdJob($this->company->id));

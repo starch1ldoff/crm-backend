@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\Providers;
 
+use Laravel\Passport\Passport;
 use View;
 use Lang;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
@@ -31,6 +32,8 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->app->make(EloquentFactory::class)
             ->load(realpath(__DIR__ . '/../database/factories'));
+
+        Passport::routes();
     }
 
     /**

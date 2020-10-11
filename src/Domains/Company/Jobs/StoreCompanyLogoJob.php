@@ -2,6 +2,7 @@
 
 namespace App\Domains\Company\Jobs;
 
+use App\Data\Enums\MediaCollection;
 use App\Data\Models\Company;
 use Illuminate\Http\UploadedFile;
 use Lucid\Foundation\Job;
@@ -32,10 +33,10 @@ class StoreCompanyLogoJob extends Job
     /**
      * Execute the job.
      *
-     * @return void
+     * @return bool
      */
-    public function handle()
+    public function handle(): bool
     {
-        //
+        return $this->company->addMedia($this->logo)->toMediaCollection(MediaCollection::LOGO);
     }
 }

@@ -11,18 +11,10 @@
 |
 */
 
-// Prefix: /api/admin
-Route::group(['prefix' => 'admin'], function() {
-
-    // The controllers live in src/Services/Admin/Http/Controllers
-    // Route::get('/', 'UserController@index');
-
-    Route::get('/', function() {
-        return response()->json(['path' => '/api/admin']);
-    });
-    
-    Route::middleware('auth:api')->get('/user', function (Request $request) {
-        return $request->user();
-    });
-
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth:api']
+], function () {
+    Route::resource('companies', 'CompanyController')->except(['create', 'edit']);
+    Route::resource('employees', 'EmployeeController')->except(['create', 'edit']);
 });
